@@ -19,17 +19,19 @@ export function verifyRefreshToken(token) {
   return jwt.verify(token, config.JWT_REFRESH_SECRET)
 }
 
+const refreshCookieOptions = {
+  httpOnly: true,
+  path: '/',
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+  secure: config.NODE_ENV === 'production',
+  // Cross-origin (Netlify + separate API host) needs None; local dev uses Strict.
+  sameSite: config.NODE_ENV === 'production' ? 'none' : 'strict',
+}
+
 export function setRefreshTokenCookie(res, token) {
-  const maxAge = 7 * 24 * 60 * 60 * 1000
-  res.cookie('refreshToken', token, {
-    httpOnly: true,
-    secure: config.NODE_ENV === 'production',
-    sameSite: 'strict',
-    maxAge,
-    path: '/',
-  })
+  res.cookie('refreshToken', token, refreshCookieOptions)
 }
 
 export function clearRefreshTokenCookie(res) {
-  res.clearCookie('refreshToken', { path: '/', httpOnly: true, sameSite: 'strict' })
+  res.clearCookie('refreshToken', refreshCookieOptions)
 }
