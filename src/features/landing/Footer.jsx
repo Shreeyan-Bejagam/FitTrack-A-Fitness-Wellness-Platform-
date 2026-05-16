@@ -1,6 +1,7 @@
-import { Camera, MessageCircle, Share2, Video, Zap } from 'lucide-react'
+import { Camera, MessageCircle, Share2, Video } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/shared/Button'
+import { Logo } from '@/components/shared/Logo'
 import { Input } from '@/components/shared/Input'
 
 const product = [
@@ -35,10 +36,7 @@ export function Footer() {
     <footer className="border-t border-border bg-muted/30 px-4 py-14 dark:bg-muted/10 md:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2 font-bold text-foreground">
-            <Zap className="h-6 w-6 text-accent" aria-hidden />
-            FitTrack
-          </div>
+          <Logo size="sm" />
           <p className="mt-3 text-sm text-muted-foreground">
             Momentum you can measure — training that fits real life.
           </p>

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { Zap } from 'lucide-react'
 import PropTypes from 'prop-types'
 import { Button } from '@/components/shared/Button'
+import { Logo } from '@/components/shared/Logo'
 import { cn, glass } from '@/lib/utils'
 import { StepIndicator } from '@/components/shared/StepIndicator'
 
@@ -30,10 +30,7 @@ export function AuthLayout({
   return (
     <motion.div className="flex min-h-screen">
       <motion.div className="relative hidden w-1/2 overflow-hidden border-r border-white/20 bg-gradient-to-br from-primary/95 via-primary/85 to-accent/90 p-12 shadow-2xl backdrop-blur-sm lg:flex lg:flex-col lg:justify-between">
-        <div className="flex items-center gap-2 text-lg font-bold text-primary-foreground">
-          <Zap className="h-8 w-8" aria-hidden />
-          FitTrack
-        </div>
+        <Logo size="lg" onDark />
         <div className="relative mx-auto max-w-sm space-y-4">
           {[
             '🔥 Streak: 12 days',

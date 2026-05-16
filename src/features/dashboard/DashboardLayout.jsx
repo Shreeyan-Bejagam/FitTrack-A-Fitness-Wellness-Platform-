@@ -18,6 +18,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Avatar } from '@/components/shared/Avatar'
+import { Logo } from '@/components/shared/Logo'
 import { useTheme } from '@/hooks/useTheme'
 import { useAppearanceStore } from '@/store/appearanceStore'
 import { useAuthStore } from '@/store/authStore'
@@ -118,9 +119,9 @@ export function DashboardLayout() {
         animate={{ width: collapsed ? 64 : 240 }}
         transition={{ type: 'spring', stiffness: 320, damping: 32 }}
       >
-        <div className="flex items-center gap-2 border-b border-border p-4 font-bold">
-          <span className="text-lg text-accent">⚡</span>
-          {!collapsed ? <span>FitTrack</span> : <span className="sr-only">FitTrack</span>}
+        <div className="flex items-center gap-2 border-b border-border p-4">
+          <Logo to="/dashboard" showText={!collapsed} size="sm" textClassName="text-base" />
+          {collapsed ? <span className="sr-only">FitTrack</span> : null}
         </div>
         <nav className="flex flex-1 flex-col gap-1 p-3" aria-label="Dashboard">
           {nav.map((item) => (

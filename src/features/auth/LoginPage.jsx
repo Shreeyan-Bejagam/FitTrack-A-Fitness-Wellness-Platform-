@@ -1,12 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
-import { Dumbbell, Flame, Zap } from 'lucide-react'
+import { Dumbbell, Flame } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import { ErrorBoundary } from '@/components/shared/ErrorBoundary'
 import { Button } from '@/components/shared/Button'
+import { Logo } from '@/components/shared/Logo'
 import { Input } from '@/components/shared/Input'
 import { authApi } from '@/lib/api/auth.api'
 import { useAuthStore } from '@/store/authStore'
@@ -69,15 +70,7 @@ export function LoginPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.05 }}
           >
-            <motion.div
-              className="flex items-center gap-2 text-lg font-bold"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <Zap className="h-7 w-7" aria-hidden />
-              FitTrack
-            </motion.div>
+            <Logo onDark />
             <h2 className="mt-6 text-2xl font-bold leading-tight">Welcome back</h2>
             <p className="mt-2 text-sm text-primary-foreground/90">
               Pick up where you left off — your streaks and plans are waiting.
@@ -103,10 +96,13 @@ export function LoginPage() {
           </motion.div>
 
           <div className="w-full">
-            <div className="mb-5 flex items-center justify-center gap-2 lg:hidden">
-              <Zap className="h-7 w-7 text-accent" aria-hidden />
-              <span className="text-lg font-bold text-foreground">FitTrack</span>
-            </div>
+            <motion.div
+              className="mb-5 flex justify-center lg:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              <Logo />
+            </motion.div>
 
             <motion.div
               className={cn('w-full p-6 sm:p-8', glass.panel)}

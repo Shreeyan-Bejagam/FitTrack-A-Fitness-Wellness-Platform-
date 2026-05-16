@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, Moon, Sun, X, Zap } from 'lucide-react'
+import { Menu, Moon, Sun, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/shared/Button'
+import { Logo } from '@/components/shared/Logo'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { useScrolled } from '@/hooks/useScrolled'
 import { useTheme } from '@/hooks/useTheme'
@@ -47,10 +48,7 @@ export function Navbar() {
         role="navigation"
         aria-label="Main navigation"
       >
-        <a href="/" className="flex items-center gap-2 text-lg font-bold text-foreground">
-          <Zap className="h-7 w-7 text-accent" aria-hidden />
-          FitTrack
-        </a>
+        <Logo to="/" />
 
         <div className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
