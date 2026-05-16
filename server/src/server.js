@@ -4,6 +4,7 @@ import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import { config } from './config/env.js'
+import { isOriginAllowed } from './config/cors.js'
 import { uploadsRoot } from './config/uploads.js'
 import { connectDB } from './config/db.js'
 import { errorMiddleware } from './middlewares/error.middleware.js'
@@ -29,17 +30,12 @@ app.use(
 if (!config.useCloudinary) {
   app.use('/uploads', express.static(uploadsRoot))
 }
-const devOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173']
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin) return callback(null, true)
-      const allowed =
-        config.NODE_ENV === 'development'
-          ? [...devOrigins, config.CLIENT_URL]
-          : [config.CLIENT_URL]
-      if (allowed.includes(origin)) return callback(null, true)
-      callback(new Error(`CORS blocked for origin: ${origin}`))
+      if (isOriginAllowed(origin)) return callback(null, true)
+      console.warn(`CORS blocked origin: ${origin}`)
+      callback(null, false)
     },
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
