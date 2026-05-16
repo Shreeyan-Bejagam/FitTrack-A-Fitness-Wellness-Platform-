@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --primary: 217 91% 40%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --accent: 24 95% 53%;
+    --accent-foreground: 0 0% 100%;
+    --neutral: 215 20% 65%;
+    --neutral-foreground: 222.2 47.4% 11.2%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --error: 0 84% 60%;
+    --error-foreground: 0 0% 100%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --border: 214 32% 91%;
+    --ring: 217 91% 40%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 222.2 47% 6%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 47% 9%;
+    --card-foreground: 210 40% 98%;
+    --primary: 217 91% 55%;
+    --primary-foreground: 222.2 47% 6%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 24 95% 58%;
+    --accent-foreground: 222.2 47% 6%;
+    --neutral: 215 20% 45%;
+    --neutral-foreground: 210 40% 98%;
+    --success: 142 70% 45%;
+    --success-foreground: 222.2 47% 6%;
+    --error: 0 72% 51%;
+    --error-foreground: 0 0% 100%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 65%;
+    --border: 217 33% 18%;
+    --ring: 217 91% 55%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    --font-scale: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased overflow-x-hidden;
+    font-size: calc(1rem * var(--font-scale, 1));
+    background-color: hsl(var(--background));
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-accent;
+  }
+}
+
+@layer components {
+  /* Ambient mesh behind all pages */
+  .app-mesh {
+    @apply relative min-h-screen isolate;
+  }
+
+  .app-mesh::before,
+  .app-mesh::after {
+    content: '';
+    position: fixed;
+    border-radius: 9999px;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.55;
+  }
+
+  .app-mesh::before {
+    width: min(55vw, 520px);
+    height: min(55vw, 520px);
+    top: -8%;
+    left: -6%;
+    background: hsl(var(--primary) / 0.28);
+  }
+
+  .app-mesh::after {
+    width: min(50vw, 480px);
+    height: min(50vw, 480px);
+    bottom: -10%;
+    right: -4%;
+    background: hsl(var(--accent) / 0.22);
+  }
+
+  .dark .app-mesh::before {
+    opacity: 0.35;
+    background: hsl(var(--primary) / 0.2);
+  }
+
+  .dark .app-mesh::after {
+    opacity: 0.3;
+    background: hsl(var(--accent) / 0.15);
+  }
+
+  .glass {
+    @apply border border-white/30 bg-white/45 shadow-lg shadow-primary/5 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.06] dark:shadow-black/25;
+  }
+
+  .glass-card {
+    @apply rounded-xl border border-white/35 bg-white/55 shadow-lg shadow-primary/[0.06] backdrop-blur-lg dark:border-white/10 dark:bg-white/[0.07] dark:shadow-black/30;
+  }
+
+  .glass-panel {
+    @apply rounded-2xl border border-white/40 bg-white/50 shadow-xl shadow-primary/10 backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.08] dark:shadow-black/40;
+  }
+
+  .glass-nav {
+    @apply border-white/25 bg-white/55 shadow-sm backdrop-blur-2xl dark:border-white/10 dark:bg-background/35;
+  }
+
+  .glass-sidebar {
+    @apply border-white/20 bg-white/40 backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.04];
+  }
+
+  .glass-input {
+    @apply border-white/40 bg-white/50 backdrop-blur-md placeholder:text-muted-foreground/80 dark:border-white/10 dark:bg-white/[0.06];
+  }
+
+  .glass-chip {
+    @apply rounded-full border border-white/35 bg-white/40 px-3 py-1 text-xs font-medium backdrop-blur-md dark:border-white/10 dark:bg-white/[0.08];
+  }
+
+  .glass-cta {
+    @apply border border-white/25 bg-gradient-to-br from-primary/90 via-primary/80 to-accent/90 shadow-2xl shadow-primary/20 backdrop-blur-sm;
+  }
+
+  .glass-active {
+    @apply border border-accent/30 bg-accent/15 shadow-inner backdrop-blur-md;
+  }
+}
+
+@layer utilities {
+  @keyframes bounce-arrow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(8px);
+    }
+  }
+  .animate-bounce-arrow {
+    animation: bounce-arrow 2s ease-in-out infinite;
+  }
+}
